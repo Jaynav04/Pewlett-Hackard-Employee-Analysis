@@ -26,63 +26,66 @@ Import each CSV file into its corresponding SQL table.
 
 -- Data Engineering --
 -- Drop Tables if Existing including its cascades in case we need to start over
-DROP TABLE IF EXISTS departments cascade;
-DROP TABLE IF EXISTS dept_emp cascade;
-DROP TABLE IF EXISTS dept_manager cascade;
-DROP TABLE IF EXISTS employees cascade;
-DROP TABLE IF EXISTS salaries cascade;
-DROP TABLE IF EXISTS titles cascade;
+
+	DROP TABLE IF EXISTS departments cascade;
+	DROP TABLE IF EXISTS dept_emp cascade;
+	DROP TABLE IF EXISTS dept_manager cascade;
+	DROP TABLE IF EXISTS employees cascade;
+	DROP TABLE IF EXISTS salaries cascade;
+	DROP TABLE IF EXISTS titles cascade;
 
 -- Creating tables including primary keys, foreign keys, data types, and not null columns
-CREATE TABLE titles (
-    title_id varchar(5) Primary Key,
-    title varchar(30) NOT NULL
-);
 
-CREATE TABLE departments (
-    dept_no varchar(10) NOT NULL Primary Key,
-    dept_name varchar(30) NOT NULL
-);
+	CREATE TABLE titles (
+	    title_id varchar(5) Primary Key,
+	    title varchar(30) NOT NULL
+	);
+	
+	CREATE TABLE departments (
+	    dept_no varchar(10) NOT NULL Primary Key,
+	    dept_name varchar(30) NOT NULL
+	);
+	
+	CREATE TABLE employees (
+	    emp_no int NOT NULL Primary Key,
+	    emp_title_id varchar(5) NOT NULL,
+		foreign key (emp_title_id) references titles(title_id),-- foreign key
+	    birth_date varchar(10) NOT NULL,
+	    first_name varchar(30) NOT NULL,
+	    last_name varchar(30) NOT NULL,
+	    sex char(1) NOT NULL,
+	    hire_date varchar(10) NOT NULL
+	);
+	
+	CREATE TABLE dept_emp (
+	    emp_no int NOT NULL,--foreign key
+		foreign key (emp_no) references employees(emp_no),
+	    dept_no varchar(5) NOT NULL,-- foreign key
+		foreign key (dept_no) references departments(dept_no)
+	);
+	
+	CREATE TABLE salaries (
+	    emp_no int NOT NULL,--foreign key
+		foreign key (emp_no) references employees(emp_no),
+	    salary int NOT NULL
+	);
 
-CREATE TABLE employees (
-    emp_no int NOT NULL Primary Key,
-    emp_title_id varchar(5) NOT NULL,
-	foreign key (emp_title_id) references titles(title_id),-- foreign key
-    birth_date varchar(10) NOT NULL,
-    first_name varchar(30) NOT NULL,
-    last_name varchar(30) NOT NULL,
-    sex char(1) NOT NULL,
-    hire_date varchar(10) NOT NULL
-);
-
-CREATE TABLE dept_emp (
-    emp_no int NOT NULL,--foreign key
-	foreign key (emp_no) references employees(emp_no),
-    dept_no varchar(5) NOT NULL,-- foreign key
-	foreign key (dept_no) references departments(dept_no)
-);
-
-CREATE TABLE salaries (
-    emp_no int NOT NULL,--foreign key
-	foreign key (emp_no) references employees(emp_no),
-    salary int NOT NULL
-);
-
-CREATE TABLE dept_manager (
-    dept_no varchar(10) NOT NULL, --foreign key
-	foreign key (dept_no) references departments (dept_no),
-    emp_no int NOT NULL,-- foreign key
-	foreign key (emp_no) references employees(emp_no)
-);
+	CREATE TABLE dept_manager (
+	    dept_no varchar(10) NOT NULL, --foreign key
+		foreign key (dept_no) references departments (dept_no),
+	    emp_no int NOT NULL,-- foreign key
+		foreign key (emp_no) references employees(emp_no)
+	);
 
 --Import CSV's
 --Verify Data exists
-select * from titles;
-select * from departments;
-select * from employees;
-select * from dept_emp;
-select * from salaries;
-select * from dept_manager;
+
+	select * from titles;
+	select * from departments;
+	select * from employees;
+	select * from dept_emp;
+	select * from salaries;
+	select * from dept_manager;
 
 # Data Analysis
 -- 1.List the employee number, last name, first name, sex, and salary of each employee.
@@ -153,7 +156,8 @@ select * from dept_manager;
 	dept_name = 'Developement';
 
 --8. List the frequency counts, in descending order, of all the employee last names (that is, how many employees share each last name)
-	select distinct(last_name), count(last_name) as Frequency
+	
+ 	select distinct(last_name), count(last_name) as Frequency
 	from employees
 	group by distinct(last_name)
 	order by count(last_name) desc;
