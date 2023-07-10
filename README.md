@@ -28,7 +28,7 @@ Use the provided information to create a table schema for each of the six CSV fi
 
 - Import each CSV file into its corresponding SQL table.
 
--- Data Engineering --
+
 -- Drop Tables if Existing including its cascades in case we need to start over
 
 	DROP TABLE IF EXISTS departments cascade;
