@@ -1,30 +1,36 @@
-# sql-challenge
+# Pewlett Hackard 
+
+![image](https://github.com/Jaynav04/Pewlett-Hackard-Employee-Analysis/assets/130405173/12fb88d4-a7c5-4a84-b35d-85578b89e378)
+
 
 # Topic
-It’s been two weeks since you were hired as a new data engineer at Pewlett Hackard (a fictional company). Your first major task is to do a research project about people whom the company employed during the 1980s and 1990s. All that remains of the employee database from that period are six CSV files.
+It’s been two weeks since I was hired as a new data engineer at Pewlett Hackard (a fictional company). My first major task is to do a research project about people whom the company employed during the 1980s and 1990s. All that remains of the employee database from that period are six CSV files.
 
-For this project, you’ll design the tables to hold the data from the CSV files, import the CSV files into a SQL database, and then answer questions about the data. That is, you’ll perform data modeling, data engineering, and data analysis, respectively.
+In this project, my tasks involved designing tables to accommodate data from CSV files, importing those CSV files into a SQL database, and subsequently addressing data-related inquiries. To elaborate, I carried out data modeling, data engineering, and data analysis in that order.
 
 # Tools Used
 - QuickDBD
 - pgAdmin 4
 - PostgresSQL
 
+## Project is broken up into the following steps
+1. Data Modeling
+2. Data Engineering
+3. Data Analysis
+
 # Data Modeling
-Inspect the CSV files, and then sketch an Entity Relationship Diagram of the tables. To create the sketch, feel free to use a tool like QuickDBD
+Inspect the CSV files, and then sketch an Entity Relationship Diagram of the tables using QuickDBD
 
 
 ![image](https://github.com/Jaynav04/sql-challenge/assets/130405173/52b532ee-f354-46b8-b8c9-d2c898deb841)
 
-# Data Engineering
+# Data Engineering (Data Modeling)
 
 Use the provided information to create a table schema for each of the six CSV files. Be sure to do the following:
 
-- Remember to specify the data types, primary keys, foreign keys, and other constraints.
+- I must specify the data types, primary keys, foreign keys, and other constraints.
 
-- For the primary keys, verify that the column is unique. Otherwise, create a composite keyLinks to an external site., which takes two primary keys to uniquely identify a row.
-
-- Be sure to create the tables in the correct order to handle the foreign keys.
+- For the primary keys, verify that the column is unique. Otherwise, create a composite key which takes two primary keys to uniquely identify a row.
 
 - Import each CSV file into its corresponding SQL table.
 
@@ -91,7 +97,7 @@ Use the provided information to create a table schema for each of the six CSV fi
 	select * from salaries;
 	select * from dept_manager;
 
-# Data Analysis
+# Data Analysis (Conducting Analysis Queries)
 -- 1.List the employee number, last name, first name, sex, and salary of each employee.
 	
 	select e.emp_no, e.last_name,e.first_name,e.sex,s.salary
